@@ -24,7 +24,7 @@ export class Tab2Page implements OnInit {
 
   getCategory = (event) => {
     this.noticias = [];
-    //this.ionInfiniteScroll.disabled = false;
+    this.ionInfiniteScroll.disabled = false;
     this.cargarNoticias(event.detail.value);
   }
 
@@ -32,11 +32,11 @@ export class Tab2Page implements OnInit {
     this.noticiasServices.getTopHeadlinesByCategory(category).subscribe((data) => {
       //console.log(data);
 
-      // if(data.articles.length <= 0){
-      //   this.ionInfiniteScroll.disabled = true;
-      //   event.target.complete();
-      //   return;
-      // }
+      if(data.articles.length <= 0){
+        this.ionInfiniteScroll.disabled = true;
+        event.target.complete();
+        return;
+      }
 
       this.noticias.push(...data.articles);
 
